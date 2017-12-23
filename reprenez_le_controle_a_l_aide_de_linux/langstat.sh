@@ -14,7 +14,7 @@
 #############
 # VARIABLES #
 #############
-ALPHABET='A B C D E F G H I J K L M O P Q R S T U V W X Y Z'
+ALPHABET='A B C D E F G H I J K L M N O P Q R S T U V W X Y Z'
 TEMP_FILE='.langstat'
 FILENAME=$1
 ARG2='--ratio'
@@ -23,7 +23,6 @@ ARG2='--ratio'
 # BLABLA #
 ##########
 DISCLAIMER="\nPour le fichier «${FILENAME}», voici le nombre de fois où chaque lettre est utilisée au moins une fois par mot (par ordre décroissant)"
-HEADER=''
 FILE_ERROR="\n/!\\ Le 1er argument DOIT être un fichier qui existe ET être lisible ET avoir une taille non nulle!\n"
 ARG_ERROR="\n/!\\ Ce script n'accèpte qu'un maximum de 2 arguments!\n"
 USAGE="Usage:\t${0} fichier ["$ARG2"]\n"
@@ -35,7 +34,7 @@ function COUNT_LETTERS {
 
 	for LETTER in $ALPHABET
 	do
-		COUNTER=`cat $FILENAME|grep -ic $LETTER`
+		COUNTER=`grep -ic $LETTER $FILENAME`
 		echo -e $COUNTER '\t- '$LETTER >> $TEMP_FILE
 	done
 }
@@ -46,7 +45,7 @@ function BONUS_FUNCTION {
 
 	for LETTER in $ALPHABET
 	do
-		COUNTER=`cat $FILENAME|grep -ic $LETTER`
+		COUNTER=`grep -ic -e $LETTER $FILENAME`
 		RATIO=$(echo "scale=3; ($COUNTER/$TOTAL)*100"|bc|sed -e 's/00$/%/g')
 		echo -e $COUNTER '\t  |  '$RATIO'\t| ' $LETTER >> $TEMP_FILE
 	done
