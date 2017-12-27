@@ -6,7 +6,7 @@
 # OpenClassrooms - Apprenez à programmer en Python - Les boucles
 # https://openclassroom
 
-print("Fonctonnement a reproduire:")
+print("   Fonctionnement a reproduire:")
 i = 1
 while i < 20:
     if i % 3 == 0:
@@ -14,10 +14,9 @@ while i < 20:
         print("On incremente i de 4. i =", i)
         continue
     print("La variable i =", i)
-    i += 1 # Dans le cas classique on ajoute juste 1 à i
-i = 0
+    i += 1
 
-print("boucle «for», probleme de scope avec la valeur de i")
+print("   boucle «for», probleme de scope avec la valeur de i")
 for i in range(1,20):
     if i % 3 == 0:
         i += 4
@@ -26,3 +25,12 @@ for i in range(1,20):
         print("La variable i =", i)
         i += 1
 
+print("   Remplacement du «contine» par un «else»:")
+i = 1
+while i < 20:
+    if i % 3 == 0:
+        i += 4
+        print("On incremente i de 4. i =", i)
+    else:
+        print("La variable i =", i)
+        i += 1
