@@ -21,7 +21,8 @@ import random
 #########
 disclamer = "Bienvenu à la roulette, vous avez un crédit de 1000€. \
     Bonne partie. "
-err_saisie = "Il faut saisir un nombre dans la plage indiquée! "
+err_plage = "Il faut saisir un nombre dans la plage indiquée! "
+err_saisie = "Il faut saisir un nombre! "
 msg_resultat = "\nLa bille s'arrête sur le nunéro: "
 msg_numero = "\nVotre nombre est gagnant! Votre gain: "
 msg_couleur = "\nVotre couleur est gagnante! Votre gain: "
@@ -45,24 +46,18 @@ print(disclamer)
 
 while jeu_continu is True:
     # Saisie & validation du choix
-    choix_check = False
-    while choix_check is False:
+    choix_valeur = 50
+    while choix_valeur >= 50 or choix_valeur < 0:
+        choix_valeur = input("Quel numéro choisissez vous (0-49)?")
         try:
-            choix_valeur = input("Quel numéro choisissez vous (0-49)?")
-        except SyntaxError:
+            choix_valeur = int(choix_valeur)
+        except ValueError:
             print(err_saisie)
-        except NameError:
-            print(err_saisie)
-        else:
-            try:
-                choix_valeur = int(choix_valeur)
-                assert choix_valeur < 50 and choix_valeur >= 0
-            except ValueError:
-                print(err_saisie)
-            except AssertionError:
-                print(err_saisie)
-            else:
-                choix_check = True
+            choix_valeur = 50
+            continue
+
+        if choix_valeur >= 50 or choix_valeur < 0:
+            print(err_plage)
 
     # Saisie & validation de la mise
     mise_check = False
