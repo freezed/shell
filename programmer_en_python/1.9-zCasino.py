@@ -89,14 +89,11 @@ while jeu_continu is True:
     result_valeur = random.randrange(50)
 
     # Comparaison
-    result_couleur = result_valeur % 2
-    choix_couleur = choix_valeur % 2
-
     if result_valeur == choix_valeur:
         gain = mise * 3
         msg = msg_resultat + str(result_valeur) + msg_numero + \
             str(gain) + curr_symb
-    elif result_couleur == choix_couleur:
+    elif result_valeur % 2 == choix_valeur % 2:
         gain = math.ceil(mise / 2)
         msg = msg_resultat + str(result_valeur) + msg_couleur + \
             str(gain) + curr_symb
