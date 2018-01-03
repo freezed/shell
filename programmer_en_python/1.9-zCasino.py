@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 # 1.9-zCasino.py: petit jeu de roulette très simplifié
+import math
+import random
 
 # OpenClassrooms - Apprenez à programmer en Python - TP: tous au ZCasino
 # https://openclassrooms.com/courses/apprenez-a-programmer-en-python/tp-tous-au-zcasino
@@ -14,13 +16,11 @@
 # -Si même couleur: gain = 50% de la mise
 # -Sinon la mise est perdue
 
-import math
-import random
-
 #########
 # TEXTE #
 #########
-disclamer = "Bienvenu à la roulette, vous avez un crédit de 1000€. Bonne partie. "
+disclamer = "Bienvenu à la roulette, vous avez un crédit de 1000€. \
+    Bonne partie. "
 err_saisie = "Il faut saisir un nombre dans la plage indiquée! "
 msg_resultat = "\nLa bille s'arrête sur le nunéro: "
 msg_numero = "\nVotre nombre est gagnant! Votre gain: "
@@ -94,10 +94,12 @@ while jeu_continu is True:
 
     if result_valeur == choix_valeur:
         gain = mise * 3
-        msg = msg_resultat + str(result_valeur) + msg_numero + str(gain) + curr_symb
+        msg = msg_resultat + str(result_valeur) + msg_numero + \
+            str(gain) + curr_symb
     elif result_couleur == choix_couleur:
         gain = math.ceil(mise / 2)
-        msg = msg_resultat + str(result_valeur) + msg_couleur + str(gain) + curr_symb
+        msg = msg_resultat + str(result_valeur) + msg_couleur + \
+            str(gain) + curr_symb
     else:
         gain = 0 - mise
         msg = msg_resultat + str(result_valeur) + msg_perdu
