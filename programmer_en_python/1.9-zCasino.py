@@ -60,25 +60,18 @@ while jeu_continu is True:
             print(err_plage)
 
     # Saisie & validation de la mise
-    mise_check = False
-    while mise_check is False:
+    mise = 0
+    while mise <= 0 or mise > credit:
+        mise = input("Quelle est votre mise (1-" + str(credit) + "?)")
         try:
-            msg_mise = "Quelle est votre mise (1-" + str(credit) + "?)"
-            mise = input(msg_mise)
-        except SyntaxError:
+            mise = int(mise)
+        except ValueError:
             print(err_saisie)
-        except NameError:
-            print(err_saisie)
-        else:
-            try:
-                mise = int(mise)
-                assert mise > 0 and mise <= credit
-            except ValueError:
-                print(err_saisie)
-            except AssertionError:
-                print(err_saisie)
-            else:
-                mise_check = True
+            mise = 0
+            continue
+
+        if mise <= 0 or mise > credit:
+            print(err_plage)
 
     # Roulette
     result_valeur = random.randrange(50)
@@ -93,7 +86,7 @@ while jeu_continu is True:
         msg = msg_resultat + str(result_valeur) + msg_couleur + \
             str(gain) + curr_symb
     else:
-        gain = 0 - mise
+        gain = - mise
         msg = msg_resultat + str(result_valeur) + msg_perdu
 
     credit = credit + gain
