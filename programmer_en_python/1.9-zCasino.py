@@ -16,11 +16,18 @@ import random
 # -Si même couleur: gain = 50% de la mise
 # -Sinon la mise est perdue
 
+#############
+# VARIABLES #
+#############
+jeu_continu = True
+credit = 1000
+
 #########
 # TEXTE #
 #########
-disclamer = "Bienvenu à la roulette, vous avez un crédit de 1000€. \
-    Bonne partie. "
+curr_symb = "€"
+disclamer = "Bienvenu à la roulette, vous avez un crédit de " + \
+    str(credit) + curr_symb + ": bonne partie."
 err_plage = "Il faut saisir un nombre dans la plage indiquée! "
 err_saisie = "Il faut saisir un nombre! "
 msg_resultat = "\nLa bille s'arrête sur le nunéro: "
@@ -31,13 +38,6 @@ msg_continue = "Pour arrêter la partie, tapez « n »: "
 msg_solde = "Votre solde : "
 msg_arret = "Vous avez décidé d'arrêter la partie avec un solde de: "
 msg_final = "Votre solde à atteind 0€: la partie s'arrête"
-curr_symb = "€"
-
-#############
-# VARIABLES #
-#############
-jeu_continu = True
-credit = 1000
 
 ################
 # DÉBUT DU JEU #
@@ -73,8 +73,7 @@ while jeu_continu is True:
         if mise <= 0 or mise > credit:
             print(err_plage)
 
-    # Roulette
-    result_valeur = random.randrange(50)
+    result_valeur = random.randrange(50)  # Roulette
 
     # Comparaison
     if result_valeur == choix_valeur:
@@ -90,19 +89,14 @@ while jeu_continu is True:
         msg = msg_resultat + str(result_valeur) + msg_perdu
 
     credit = credit + gain
+    print(msg)  # Affichage de fin de tour
 
-    # Affichage de fin de tour
-    print(msg)
-
-    if credit > 0:
-        # affiche credit
+    if credit > 0:  # affiche credit
         print(msg_solde + str(credit))
 
-        # demande de continuer
-        ask_continue = str(input(msg_continue))
+        ask_continue = str(input(msg_continue))  # demande de continuer
 
-        if ask_continue == "n":
-        # Arret demandé par le joueur
+        if ask_continue == "n":  # Arret demandé par le joueur
             jeu_continu = False
             print(msg_arret + str(credit) + curr_symb)
 
