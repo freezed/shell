@@ -99,19 +99,12 @@ while jeu_continu is True:
         print(msg_solde + str(credit))
 
         # demande de continuer
-        ask_check = False
-        while ask_check is False:
-            try:
-                ask_continue = str(input(msg_continue))
-            except ValueError:
-                print(err_saisie)
-            else:
-                ask_check = True
+        ask_continue = str(input(msg_continue))
 
-            if ask_continue == "n":
-                # Arret demandé par le joueur
-                jeu_continu = False
-                print(msg_arret + str(credit) + curr_symb)
+        if ask_continue == "n":
+        # Arret demandé par le joueur
+            jeu_continu = False
+            print(msg_arret + str(credit) + curr_symb)
 
     else:
         jeu_continu = False
