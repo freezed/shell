@@ -30,11 +30,7 @@ def afficher_flottant(flot):
     string = str(flot)
     splited_string = string.split('.')
     entier = splited_string[0]
-
-    if len(splited_string[1]) <= 3:
-        decimal = splited_string[1][:len(splited_string[1])]
-    else:
-        decimal = splited_string[1][:3]
+    decimal = splited_string[1][:3]
 
     flotant_formate =  ','.join((entier,decimal))
     print(flotant_formate)
