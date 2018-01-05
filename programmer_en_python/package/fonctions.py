@@ -27,14 +27,20 @@ def afficher_flottant(flot):
     Affiche un nombre a virgule flottante tronque a 3 decimales
     et remplace le point (.) par une virgule (,)"""
 
-    string = str(flot)
-    entier, decimal = string.split('.')
+    if type(flot) is not float:
+        print("Le parametre doit etre de type float!")
+    else:
+        flot = str(flot)
+        entier, decimal = flot.split('.')
+        print(
+            ','.join((entier,decimal[:3]))
+        )
 
-    print(
-        ','.join((entier,decimal[:3]))
-    )
-
+# afficher_flottant
 if __name__ == "__main__":
     afficher_flottant(1.123456789)
     afficher_flottant(1.12)
     afficher_flottant(0.1)
+    afficher_flottant("a")
+    afficher_flottant(False)
+    afficher_flottant(100)
