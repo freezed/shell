@@ -19,11 +19,6 @@ def table(n, m=11):
         print(i, "x", n, "=", i * n)
 
 
-if __name__ == "__main__":
-    # test de la fonction 'table'
-    table(3)
-
-
 def afficher_flottant(flot):
 
     """Chapitre 2.3 - Entre chaînes et listes
@@ -48,3 +43,6 @@ if __name__ == "__main__":
     afficher_flottant("a")
     afficher_flottant(False)
     afficher_flottant(100)
+
+    # test de la fonction 'table'
+    #table(3)
