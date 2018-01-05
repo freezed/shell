@@ -28,14 +28,13 @@ def afficher_flottant(flot):
     et remplace le point (.) par une virgule (,)"""
 
     string = str(flot)
-    splited_string = string.split('.')
-    entier = splited_string[0]
-    decimal = splited_string[1][:3]
+    entier, decimal = string.split('.')
 
-    flotant_formate =  ','.join((entier,decimal))
-    print(flotant_formate)
+    print(
+        ','.join((entier,decimal[:3]))
+    )
 
 if __name__ == "__main__":
     afficher_flottant(1.123456789)
     afficher_flottant(1.12)
-    afficher_flottant(0.12)
+    afficher_flottant(0.1)
