@@ -35,14 +35,37 @@ def afficher_flottant(flot):
         )
 
 
+def affiche(*liste_parametres, sep=' ', fin='\n'):
+
+    """Chapitre 2.3 - Entre chaînes et listes:
+    Fonction chargée de reproduire le comportement de print.
+    Elle doit finir par faire appel à print pour afficher le résultat.
+    Mais les paramètres devront déjà avoir été formatés.
+    On doit passer à print une unique chaîne, en lui spécifiant de
+    ne rien mettre à la fin : print(chaine, end='')"""
+
+    contenu = str()
+    for parametre in liste_parametres:
+        contenu += str(parametre)
+        contenu += sep
+
+    contenu = contenu + fin
+    print(contenu, end='')
+
+
 if __name__ == "__main__":
+    # Tests de la fonction 'affiche'
+    affiche("'string'", "'autre string; 1'", 2)
+    affiche(1.12, "'string'", "'autre string; 1'", 2)
+    affiche(False, True, 1.12, "'string'", "'autre string; 1'", 2)
+
     # Tests de la fonction 'afficher_flottant'
-    afficher_flottant(1.123456789)
-    afficher_flottant(1.12)
-    afficher_flottant(0.1)
-    afficher_flottant("a")
-    afficher_flottant(False)
-    afficher_flottant(100)
+    #afficher_flottant(1.123456789)
+    #afficher_flottant(1.12)
+    #afficher_flottant(0.1)
+    #afficher_flottant("a")
+    #afficher_flottant(False)
+    #afficher_flottant(100)
 
     # test de la fonction 'table'
     #table(3)
