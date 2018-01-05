@@ -38,3 +38,8 @@ def afficher_flottant(flot):
 
     flotant_formate =  ','.join((entier,decimal))
     print(flotant_formate)
+
+if __name__ == "__main__":
+    afficher_flottant(1.123456789)
+    afficher_flottant(1.12)
+    afficher_flottant(0.12)
