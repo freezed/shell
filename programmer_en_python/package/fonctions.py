@@ -9,17 +9,20 @@
 """Module de test, contient les fonctions crees durant le cours
 OpenClassrooms - Apprenez à programmer en Python"""
 
+
 def table(n, m=11):
     """Chapitre 1.7 - Modularite
     Affiche la table de multiplication d'un nombre
     de 1 * n
     a m * n """
     for i in range(1, m):
-        print(i,"x",n,"=",i * n)
+        print(i, "x", n, "=", i * n)
 
-# test de _table_
+
 if __name__ == "__main__":
+    # test de la fonction 'table'
     table(3)
+
 
 def afficher_flottant(flot):
 
@@ -33,11 +36,12 @@ def afficher_flottant(flot):
         flot = str(flot)
         entier, decimal = flot.split('.')
         print(
-            ','.join((entier,decimal[:3]))
+            ','.join((entier, decimal[:3]))
         )
 
-# afficher_flottant
+
 if __name__ == "__main__":
+    # Tests de la fonction 'afficher_flottant'
     afficher_flottant(1.123456789)
     afficher_flottant(1.12)
     afficher_flottant(0.1)
