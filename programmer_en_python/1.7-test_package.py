@@ -6,6 +6,6 @@
 # OpenClassrooms - Apprenez à programmer en Python - Modularité
 # https://openclassroom/courses/apprenez-a-programmer-en-python/pas-a-pas-vers-la-modularite-2-2
 
-from package17.fonctions import table
+from package.fonctions import table
 
 table(8, 12)
