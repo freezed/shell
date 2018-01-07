@@ -4,6 +4,7 @@
 # 1.9-zCasino.py: petit jeu de roulette très simplifié
 import math
 import random
+import os
 
 # OpenClassrooms - Apprenez à programmer en Python - TP: tous au ZCasino
 # https://openclassrooms.com/courses/apprenez-a-programmer-en-python/tp-tous-au-zcasino
@@ -21,6 +22,8 @@ import random
 #############
 jeu_continu = True
 credit = 1000
+filename = ".highscore"
+old_highscore = -1
 
 #########
 # TEXTE #
@@ -38,6 +41,9 @@ msg_continue = "Pour arrêter la partie, tapez « n »: "
 msg_solde = "Votre solde : "
 msg_arret = "Vous avez décidé d'arrêter la partie avec un solde de: "
 msg_final = "Votre solde à atteind 0€: la partie s'arrête"
+msg_no_score = "Pas d'ancien score."
+msg_best_score = "Bravo, vous battez le précédent record de gain qui était: "
+msg_bad_score = "Le record de gain enregistré était: "
 
 ################
 # DÉBUT DU JEU #
@@ -98,9 +104,27 @@ while jeu_continu is True:
 
         if ask_continue == "n":  # Arret demandé par le joueur
             jeu_continu = False
-            print(msg_arret + str(credit) + curr_symb)
+            msg_final = (msg_arret + str(credit) + curr_symb)
 
     else:
-        jeu_continu = False
-        # fin du jeu
-        print(msg_final)
+        jeu_continu = False  # fin du jeu
+
+if os.path.isfile(filename) is True:  # On recupere le highscore
+    with open(filename, "r") as highscore:
+        old_highscore = int(highscore.read())
+
+if old_highscore == -1:  # Pas encore de partie gagnante
+    msg_score = msg_no_score
+
+elif credit > old_highscore and old_highscore != -1:  # Highscore battu
+    msg_score = msg_best_score + str(old_highscore) + curr_symb
+
+else:
+    msg_score = msg_bad_score + str(old_highscore) + curr_symb
+
+if (credit > 0 and old_highscore == -1) or credit > old_highscore:
+    with open(filename, "w") as highscore:
+        highscore.write(str(credit))
+
+print(msg_final)  # Affichage du message de fin de partie
+print(msg_score)  # Affichage du score/highscore
