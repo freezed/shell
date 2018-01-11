@@ -33,4 +33,8 @@ do
 done
 
 echo "\nNombre final de mot dans DICO :"$COUNTDICO
+
+# Oneliner:
+# grep -vcP "(SSENT|SSIEZ|ERONT|AIENT|ANTE|SSEZ|AUX|S)\s" dico.txt
+
 echo $DICO > .dicolight
