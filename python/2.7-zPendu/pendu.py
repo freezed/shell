@@ -34,13 +34,15 @@ ASK_LETTER = "ASK_LETTER : "
 ERR_LETTER_TYPE = "ERR_LETTER_TYPE"
 ERR_VALUE_ERR = "ERR_VALUE_ERR"
 ERR_WORD_LIST_FILE = "ERR_WORD_LIST_FILE"
-MAX_TURNS = 8
+MAX_TURNS = 18
 MSG_END_GAME = "MSG_END_GAME : "
+MSG_1ST_GAME = "MSG_1ST_GAME"
+MSG_NEW_GAME = "MSG_MEW_GAME"
 
 # Variables
 game_continue = True
 turns = 0
-old_scores = dict()
+scores = {}
 
 # Le joueur donne son nom
 player_name = str(input(ASK_NAME))
@@ -83,10 +85,21 @@ print(target_word)
 if os.path.isfile(SCORES_FILE) is True:  # Ouverture du fichier
     with open(SCORES_FILE, "rb") as scores_file:
         old_scores = pickle.Unpickler(scores_file).load()
+        print(MSG_NEW_GAME)
+
+else:
+    old_scores = {player_name : 0}
+    print(MSG_1ST_GAME)
 
 # Calcul du score
-score = {player_name: old_scores[player_name] + points}
+if old_scores.get(player_name, False) is False:  # Nouveau joueur
+    old_scores.update({player_name : 0})
+
+scores.update(old_scores)
+scores[player_name] = scores[player_name] + points
 
 #TODO Enregistrement du score
 with open(SCORES_FILE, "wb") as scores_file:
-    old_scores = pickle.Pickler(scores_file).dump(score)
+    pickle.Pickler(scores_file).dump(scores)
+
+print(scores)
