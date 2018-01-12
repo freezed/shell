@@ -19,6 +19,12 @@ from fonctions import check_letter
 # Le score: score courant (0 si aucun score deja enregistre), a
 # chaque partie, ajoute le nombre de coups restants (non utilise)
 
+#TODO ne pas accepter une lettre deja jouee
+#TODO input case insensitiv
+#TODO input pas plus d'une lettre
+#TODO input verif [A-Z]
+#TODO
+
 # Constantes
 SCORE_FILE = ".score"
 WORD_LIST_FILE = "dicolight.txt"
@@ -61,17 +67,16 @@ while game_continue is True:
     if turns == MAX_TURNS:  # Compte les tours de jeu
         game_continue = False
 
-    # Affichage de la fin de tour
+    #TODO Affichage de la fin de tour
     print("tour : ",turns,"sur ",MAX_TURNS)
     print(player_word)
 
+#TODO Fin de partie
 print(MSG_END_GAME)
 print(target_word)
-
-# Fin de partie
 print(player_word.count("*"))
 print(len(target_word))
 
-# Affichage du score de la partie et des highscores
+#TODO Affichage du score de la partie et des highscores
 
-# Enregistrement du score
+#TODO Enregistrement du score
