@@ -27,6 +27,11 @@ ASK_LETTER = "ASK_LETTER : "
 ERR_LETTER_TYPE = "ERR_LETTER_TYPE"
 ERR_VALUE_ERR = "ERR_VALUE_ERR"
 ERR_WORD_LIST_FILE = "ERR_WORD_LIST_FILE"
+MAX_TURNS = 8
+MSG_END_GAME = "MSG_END_GAME"
+# Variables
+game_continue = True
+turns = 0
 
 # Le joueur donne son nom
 player_name = str(input(ASK_NAME))
@@ -43,19 +48,24 @@ target_word = list(word_list[random.randrange(0, len(word_list))])
 player_word = list("*" * len(target_word))
 
 # Debut de partie
+while game_continue is True:
+    letter = str(input(ASK_LETTER))  # Le joueur choisi une lettre
 
-# Debut de tour, le joueur choisi une lettre
-letter = str(input(ASK_LETTER))
+    # Presence de la lettre?
+    if check_letter(letter, target_word) is not False:
+        positions = check_letter(letter, target_word)
+        for i in positions:
+            player_word[i] = letter
 
-# Recherche si la lettre est presente: on la place dans player_word
-if check_letter(letter, target_word) is not False:
-    positions = check_letter(letter, target_word)
-    for i in positions:
-        player_word[i] = letter
+    turns += 1
+    if turns == MAX_TURNS:  # Compte les tours de jeu
+        game_continue = False
 
+    # Affichage de la fin de tour
+    print("tour : ",turns,"sur ",MAX_TURNS)
+    print(player_word)
 
-# Affichage de la fin de tour
-print(player_word)
+print(MSG_END_GAME)
 print(target_word)
 
 # Fin de partie
