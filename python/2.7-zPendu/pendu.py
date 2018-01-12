@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import random
 import os
+import pickle
 from fonctions import check_letter
 
 # 2.7-zPendu.py: Jeu de pendu avec cumul des scores des differant joueurs
@@ -26,7 +27,7 @@ from fonctions import check_letter
 #TODO
 
 # Constantes
-SCORE_FILE = ".score"
+SCORES_FILE = ".score"
 WORD_LIST_FILE = "dicolight.txt"
 ASK_NAME = "ASK_NAME : "
 ASK_LETTER = "ASK_LETTER : "
@@ -34,10 +35,12 @@ ERR_LETTER_TYPE = "ERR_LETTER_TYPE"
 ERR_VALUE_ERR = "ERR_VALUE_ERR"
 ERR_WORD_LIST_FILE = "ERR_WORD_LIST_FILE"
 MAX_TURNS = 8
-MSG_END_GAME = "MSG_END_GAME"
+MSG_END_GAME = "MSG_END_GAME : "
+
 # Variables
 game_continue = True
 turns = 0
+old_scores = dict()
 
 # Le joueur donne son nom
 player_name = str(input(ASK_NAME))
@@ -64,19 +67,26 @@ while game_continue is True:
             player_word[i] = letter
 
     turns += 1
-    if turns == MAX_TURNS:  # Compte les tours de jeu
+    if turns == MAX_TURNS or player_word.count("*") == 0:  # Fin de partie?
         game_continue = False
 
     #TODO Affichage de la fin de tour
-    print("tour : ",turns,"sur ",MAX_TURNS)
+    print("tour : ", turns, "sur ", MAX_TURNS)
     print(player_word)
 
 #TODO Fin de partie
-print(MSG_END_GAME)
+points = MAX_TURNS - turns
+print(MSG_END_GAME, points)
 print(target_word)
-print(player_word.count("*"))
-print(len(target_word))
 
 #TODO Affichage du score de la partie et des highscores
+if os.path.isfile(SCORES_FILE) is True:  # Ouverture du fichier
+    with open(SCORES_FILE, "rb") as scores_file:
+        old_scores = pickle.Unpickler(scores_file).load()
+
+# Calcul du score
+score = {player_name: old_scores[player_name] + points}
 
 #TODO Enregistrement du score
+with open(SCORES_FILE, "wb") as scores_file:
+    old_scores = pickle.Pickler(scores_file).dump(score)
