@@ -3,7 +3,7 @@
 import random
 import os
 import pickle
-from fonctions import check_letter
+from fonctions import *
 
 # 2.7-zPendu.py: Jeu de pendu avec cumul des scores des differant joueurs
 
@@ -42,7 +42,6 @@ MSG_NEW_GAME = "MSG_MEW_GAME"
 # Variables
 game_continue = True
 turns = 0
-scores = {}
 
 # Le joueur donne son nom
 player_name = str(input(ASK_NAME))
@@ -73,8 +72,10 @@ while game_continue is True:
         game_continue = False
 
     #TODO Affichage de la fin de tour
+    cls()
     print("tour : ", turns, "sur ", MAX_TURNS)
     print(player_word)
+
 
 #TODO Fin de partie
 points = MAX_TURNS - turns
@@ -84,18 +85,17 @@ print(target_word)
 #TODO Affichage du score de la partie et des highscores
 if os.path.isfile(SCORES_FILE) is True:  # Ouverture du fichier
     with open(SCORES_FILE, "rb") as scores_file:
-        old_scores = pickle.Unpickler(scores_file).load()
+        scores = pickle.Unpickler(scores_file).load()
         print(MSG_NEW_GAME)
 
 else:
-    old_scores = {player_name : 0}
+    scores = {player_name : 0}
     print(MSG_1ST_GAME)
 
 # Calcul du score
-if old_scores.get(player_name, False) is False:  # Nouveau joueur
-    old_scores.update({player_name : 0})
+if scores.get(player_name, False) is False:  # Nouveau joueur
+    scores.update({player_name : 0})
 
-scores.update(old_scores)
 scores[player_name] = scores[player_name] + points
 
 #TODO Enregistrement du score

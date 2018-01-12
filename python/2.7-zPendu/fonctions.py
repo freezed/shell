@@ -20,6 +20,12 @@ def check_letter(letter, target):
         return [k for k, v in enumerate(target) if letter == v]
 
 
+def cls():
+    import os
+    os.system('clear')
+    return
+
+
 if __name__ == "__main__":
     # Tests de la fonction
     print(check_letter('A', ['M', 'A', 'M', 'O', 'U', 'T', 'H']))
