@@ -20,9 +20,6 @@ from fonctions import check_letter, cls
 # Le score: score courant (0 si aucun score deja enregistre), a
 # chaque partie, ajoute le nombre de coups restants (non utilise)
 
-# TODO ne pas accepter une lettre deja jouee
-# TODO input pas plus d'une lettre
-# TODO input verif [A-Z]
 # TODO
 
 # Constantes
@@ -33,6 +30,9 @@ ASK_LETTER = "ASK_LETTER : "
 ERR_LETTER_TYPE = "ERR_LETTER_TYPE"
 ERR_VALUE_ERR = "ERR_VALUE_ERR"
 ERR_WORD_LIST_FILE = "ERR_WORD_LIST_FILE"
+ERR_LETTER_LEN = "ERR_LETTER_LEN"
+ERR_LETTER_ALPHA = "ERR_LETTER_ALPHA"
+ERR_LETTER_USED = "ERR_LETTER_USED"
 MAX_TURNS = 18
 MSG_END_GAME = "MSG_END_GAME : "
 MSG_1ST_GAME = "MSG_1ST_GAME"
@@ -40,7 +40,12 @@ MSG_NEW_GAME = "MSG_MEW_GAME"
 
 # Variables
 game_continue = True
+letter = str()
 turns = 0
+alphabet = [
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+]
 
 # Le joueur donne son nom
 player_name = str(input(ASK_NAME))
@@ -58,7 +63,23 @@ player_word = list("*" * len(target_word))
 
 # Debut de partie
 while game_continue is True:
-    letter = upper(str(input(ASK_LETTER)))  # Le joueur choisi une lettre
+
+    while (
+        len(letter) != 1
+        or letter.isalpha() is False
+        or alphabet.count(letter) != 1
+    ):  # Le joueur choisi une lettre
+
+            letter = str(input(ASK_LETTER)).upper()
+
+            if len(letter) != 1:
+                print(ERR_LETTER_LEN)
+
+            elif letter.isalpha() is False:
+                print(ERR_LETTER_ALPHA)
+
+            elif alphabet.count(letter) != 1:
+                print(ERR_LETTER_USED)
 
     # Presence de la lettre?
     if check_letter(letter, target_word) is not False:
@@ -66,12 +87,14 @@ while game_continue is True:
         for i in positions:
             player_word[i] = letter
 
+    alphabet[alphabet.index(letter)] = '_'
     turns += 1
     if turns == MAX_TURNS or player_word.count("*") == 0:  # Fin de partie?
         game_continue = False
 
     # TODO Affichage de la fin de tour
     cls()
+    print(alphabet)
     print("tour : ", turns, "sur ", MAX_TURNS)
     print(player_word)
 
