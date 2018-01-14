@@ -21,13 +21,12 @@ from fonctions import check_letter, cls
 # chaque partie, ajoute le nombre de coups restants (non utilise)
 
 # TODO ne pas accepter une lettre deja jouee
-# TODO input case insensitiv
 # TODO input pas plus d'une lettre
 # TODO input verif [A-Z]
 # TODO
 
 # Constantes
-SCORES_FILE = ".score"
+SCORES_FILE = ".scores"
 WORD_LIST_FILE = "dicolight.txt"
 ASK_NAME = "ASK_NAME : "
 ASK_LETTER = "ASK_LETTER : "
@@ -59,7 +58,7 @@ player_word = list("*" * len(target_word))
 
 # Debut de partie
 while game_continue is True:
-    letter = str(input(ASK_LETTER))  # Le joueur choisi une lettre
+    letter = upper(str(input(ASK_LETTER)))  # Le joueur choisi une lettre
 
     # Presence de la lettre?
     if check_letter(letter, target_word) is not False:
@@ -79,6 +78,7 @@ while game_continue is True:
 
 # TODO Fin de partie
 points = MAX_TURNS - turns
+cls()
 print(MSG_END_GAME, points)
 print(target_word)
 
