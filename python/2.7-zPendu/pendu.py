@@ -20,9 +20,9 @@ from fonctions import check_letter, cls, stringalise
 # Le score: score courant (0 si aucun score deja enregistre), a
 # chaque partie, ajoute le nombre de coups restants (non utilise)
 
-# TODO intégrer la date de 1ere partie dans le score
-# TODO intégrer la partie au plus fort score
-# TODO zerofill les scores
+# intégrer la date de 1ere partie dans le score
+# intégrer la partie au plus fort score
+# zerofill les scores
 
 # Constantes
 SCORES_FILE = ".scores"
@@ -30,9 +30,10 @@ WORD_LIST_FILE = "dicolight.txt"
 MAX_TURNS = 12
 MAX_NAME_LEN = 7
 MIN_NAME_LEN = 2
-MSG_DISCLAMER = "Bienvenue au zPendu!\nLe but du jeu est de deviner"+\
+MSG_DISCLAMER = "Bienvenue au zPendu!\nLe but du jeu est de deviner" + \
     " un mot de 8 lettres max en moins de {} tours.".format(MAX_TURNS)
-ASK_NAME = "Votre nom ({} à {} caratères) : ".format(MIN_NAME_LEN, MAX_NAME_LEN)
+ASK_NAME = "Votre nom ({} à {} caratères) : "\
+    .format(MIN_NAME_LEN, MAX_NAME_LEN)
 ASK_LETTER = "Choisissez une lettre : "
 ERR_WORD_LIST_FILE = "\t#!@?# Oups… Le dictionnaire n'est pas accesible! #?@!#"
 ERR_LETTER_LEN = "\t#!@?# Oups… Saisie trop courte ou trop longue! #?@!#"
@@ -52,6 +53,7 @@ alphabet = [
     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ]
 
+cls()
 print(MSG_DISCLAMER)
 
 while (
@@ -108,20 +110,20 @@ while game_continue is True:
     if turns == MAX_TURNS or player_word.count("*") == 0:  # Fin de partie?
         game_continue = False
 
-    # TODO Affichage de la fin de tour
+    # Affichage de la fin de tour
     cls()
     print(stringalise(alphabet))
     print("tour : ", turns, "sur ", MAX_TURNS)
     print(stringalise(player_word))
 
 
-# TODO Fin de partie
+# Fin de partie
 points = (MAX_TURNS - turns) + 1
 cls()
 print(MSG_END_GAME.format(points))
 print(stringalise(target_word))
 
-# TODO Affichage du score de la partie et des highscores
+# Affichage du score de la partie et des highscores
 if os.path.isfile(SCORES_FILE) is True:  # Ouverture du fichier
     with open(SCORES_FILE, "rb") as scores_file:
         scores = pickle.Unpickler(scores_file).load()
@@ -136,10 +138,13 @@ if scores.get(player_name, False) is False:  # Nouveau joueur
 
 scores[player_name] = scores[player_name] + points
 
-# TODO Enregistrement du score
+# Enregistrement du score
 with open(SCORES_FILE, "wb") as scores_file:
     pickle.Pickler(scores_file).dump(scores)
 
 print(MSG_SCORES)
-for score in sorted({(points, player) for player, points in scores.items()}, reverse=True):
+for score in sorted(
+    {(points, player) for player, points in scores.items()},
+    reverse=True
+):
     print("{}\t: {} points".format(score[1], score[0]))
