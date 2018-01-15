@@ -3,7 +3,10 @@
 import random
 import os
 import pickle
-from fonctions import check_letter, cls, stringalise
+from donnees import *
+from fonctions import *
+
+ #check_letter, cls, stringalise
 
 # 2.7-zPendu.py: Jeu de pendu avec cumul des scores des differant joueurs
 
