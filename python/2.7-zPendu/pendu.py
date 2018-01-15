@@ -22,7 +22,6 @@ from fonctions import check_letter, cls, stringalise
 
 # TODO intégrer la date de 1ere partie dans le score
 # TODO intégrer la partie au plus fort score
-# TODO Fixer des regles pour les noms de joueurs
 # TODO zerofill les scores
 
 # Constantes
@@ -37,6 +36,8 @@ ERR_LETTER_LEN = "ERR_LETTER_LEN"
 ERR_LETTER_ALPHA = "ERR_LETTER_ALPHA"
 ERR_LETTER_USED = "ERR_LETTER_USED"
 MAX_TURNS = 16
+MAX_NAME_LEN = 7
+MIN_NAME_LEN = 2
 MSG_END_GAME = "MSG_END_GAME : "
 MSG_1ST_GAME = "MSG_1ST_GAME"
 MSG_NEW_GAME = "MSG_MEW_GAME"
@@ -52,8 +53,15 @@ alphabet = [
     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ]
 
-while player_name.isalnum() is False:  # Le joueur donne son nom
-    player_name = str(input(ASK_NAME))
+while (
+    len(player_name) < MIN_NAME_LEN or
+    len(player_name) > MAX_NAME_LEN or
+    player_name.isalnum() is False
+):  # Le joueur donne son nom
+    player_name = str(input(ASK_NAME)).capitalize()
+
+    if len(player_name) < MIN_NAME_LEN or len(player_name) > MAX_NAME_LEN:
+        print(ERR_LETTER_LEN)
 
     if player_name.isalnum() is False:
         print(ERR_LETTER_ALPHA)
