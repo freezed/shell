@@ -20,7 +20,10 @@ from fonctions import check_letter, cls, stringalise
 # Le score: score courant (0 si aucun score deja enregistre), a
 # chaque partie, ajoute le nombre de coups restants (non utilise)
 
-# TODO
+# TODO intégrer la date de 1ere partie dans le score
+# TODO intégrer la partie au plus fort score
+# TODO Fixer des regles pour les noms de joueurs
+# TODO zerofill les scores
 
 # Constantes
 SCORES_FILE = ".scores"
