@@ -33,10 +33,11 @@ ERR_WORD_LIST_FILE = "ERR_WORD_LIST_FILE"
 ERR_LETTER_LEN = "ERR_LETTER_LEN"
 ERR_LETTER_ALPHA = "ERR_LETTER_ALPHA"
 ERR_LETTER_USED = "ERR_LETTER_USED"
-MAX_TURNS = 18
+MAX_TURNS = 16
 MSG_END_GAME = "MSG_END_GAME : "
 MSG_1ST_GAME = "MSG_1ST_GAME"
 MSG_NEW_GAME = "MSG_MEW_GAME"
+MSG_SCORES = "MSG_SCORES"
 
 # Variables
 game_continue = True
@@ -112,7 +113,6 @@ print(stringalise(target_word))
 if os.path.isfile(SCORES_FILE) is True:  # Ouverture du fichier
     with open(SCORES_FILE, "rb") as scores_file:
         scores = pickle.Unpickler(scores_file).load()
-        print(MSG_NEW_GAME)
 
 else:
     scores = {player_name: 0}
@@ -128,4 +128,6 @@ scores[player_name] = scores[player_name] + points
 with open(SCORES_FILE, "wb") as scores_file:
     pickle.Pickler(scores_file).dump(scores)
 
-print(scores)
+print(MSG_SCORES)
+for score in sorted({(points, player) for player, points in scores.items()}, reverse=True):
+    print("{}\t: {} points".format(score[1], score[0]))
