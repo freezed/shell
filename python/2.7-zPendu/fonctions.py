@@ -21,9 +21,23 @@ def check_letter(letter, target):
 
 
 def cls():
+    """ Efface l'historique de la console """
     import os
     os.system('clear')
     return
+
+
+def stringalise (letter_list):
+    """
+        Convertit un liste en une chaine
+        @letter_list list()
+        @return string()
+    """
+    stringalised = str()
+    for letter in letter_list:
+        stringalised = stringalised + ' ' + letter
+
+    return stringalised
 
 
 if __name__ == "__main__":

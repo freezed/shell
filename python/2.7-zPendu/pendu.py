@@ -3,7 +3,7 @@
 import random
 import os
 import pickle
-from fonctions import check_letter, cls
+from fonctions import check_letter, cls, stringalise
 
 # 2.7-zPendu.py: Jeu de pendu avec cumul des scores des differant joueurs
 
@@ -97,16 +97,16 @@ while game_continue is True:
 
     # TODO Affichage de la fin de tour
     cls()
-    print(alphabet)
+    print(stringalise(alphabet))
     print("tour : ", turns, "sur ", MAX_TURNS)
-    print(player_word)
+    print(stringalise(player_word))
 
 
 # TODO Fin de partie
 points = MAX_TURNS - turns
 cls()
 print(MSG_END_GAME, points)
-print(target_word)
+print(stringalise(target_word))
 
 # TODO Affichage du score de la partie et des highscores
 if os.path.isfile(SCORES_FILE) is True:  # Ouverture du fichier
