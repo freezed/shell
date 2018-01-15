@@ -40,6 +40,7 @@ MSG_NEW_GAME = "MSG_MEW_GAME"
 
 # Variables
 game_continue = True
+player_name = str()
 letter = str()
 turns = 0
 alphabet = [
@@ -47,11 +48,13 @@ alphabet = [
     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ]
 
-# Le joueur donne son nom
-player_name = str(input(ASK_NAME))
+while player_name.isalnum() is False:  # Le joueur donne son nom
+    player_name = str(input(ASK_NAME))
 
-# Chargement du dictionnaire
-if os.path.isfile(WORD_LIST_FILE) is True:
+    if player_name.isalnum() is False:
+        print(ERR_LETTER_ALPHA)
+
+if os.path.isfile(WORD_LIST_FILE) is True:  # Chargement du dictionnaire
     with open(WORD_LIST_FILE, "r") as word_list_file:
         word_list = word_list_file.read().splitlines()
 else:
