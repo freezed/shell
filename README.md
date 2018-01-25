@@ -1,3 +1,3 @@
 # Homework
 
-A place for my [Openclassrooms](https://openclassrooms.com/) trainings.
+A place for my shell scripting trainings.
