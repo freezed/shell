@@ -12,7 +12,6 @@
 # VARIABLES #
 #############
 FILENAME=$1
-PAGES=`pdftk $FILENAME dump_data | grep NumberOfPages | cut -d" " -f2`
 TMPPATTERN="~\$-tmp_"
 
 ##########
@@ -27,16 +26,17 @@ USAGE="Usage:\t${0} file.pdf\n"
 ############################
 
 ## Count arguments
-if [ $# -gt 1 ]
+if [ $# -eq 1 ]
 then
     echo -e $ARG_ERROR
     echo -e $USAGE
-    exit 1
-fi
+    #~ exit 1
 
 ## Checks file
-if [ -s "$FILENAME" ] && [ -r "$FILENAME" ]
+elif [ -s "$FILENAME" ] && [ -r "$FILENAME" ]
 then
+    PAGES=`pdftk $FILENAME dump_data | grep NumberOfPages | cut -d" " -f2`
+
     ## Do the conversion
     if [[ $PAGES -gt 1 ]]
     then
@@ -60,5 +60,5 @@ then
 else
     echo -e $FILE_ERROR
     echo -e $USAGE
-    exit 1
+    #~ exit 1
 fi
