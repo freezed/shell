@@ -30,7 +30,7 @@ USAGE="Usage:\t${0} file.pdf\n"
 ############################
 
 ## Count arguments
-if [ $# -eq 1 ]
+if [ $# -ne 1 ]
 then
     echo -e $ARG_ERROR
     echo -e $USAGE
