@@ -8,6 +8,10 @@
 # Licence: GNU GPL v3 [www.gnu.org/licenses/gpl.html]
 # Version: 0.1
 
+# TODO if file is not PDF
+# TODO if file has no page
+# TODO crop margins
+
 #############
 # VARIABLES #
 #############
